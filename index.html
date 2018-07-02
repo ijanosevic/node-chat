@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Node chat</title>
+	<!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			
+			<form id="register_form" name="register_form" class="col m3 s6">
+				<h5>register</h5>
+				<div class="row">
+					<div class="input-field col m12">
+						<input placeholder="Username" id="username" name="username" type="text">
+					</div>
+					<div class="input-field col m12">
+						<input placeholder="Email" id="email" type="text">
+					</div>
+					<div class="input-field col m12">
+						<input placeholder="Password" id="password" type="password">
+					</div>
+					<div class="input-field col m12">
+						<input placeholder="Retype Password" id="retype_password" type="password">
+					</div>
+				</div>
+				<a class="waves-effect waves-light btn-small">Register</a>
+			</form>
+			
+			<form id="login_form" name="login_form" class="col m3 s6">
+				<h5>login</h5>
+				<div class="row">
+					<div class="input-field col m12">
+						<input placeholder="Username" id="l_username" type="text" class="validate">
+					</div>
+					<div class="input-field col m12">
+						<input placeholder="Password" id="l_password" type="password" class="validate">
+					</div>
+				</div>
+				<a class="waves-effect waves-light btn-small">Login</a>
+			</form>
+
+		</div>
+	</div>
+
+
+
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="static/js/validation.js"></script>
+</body>
+</html>
