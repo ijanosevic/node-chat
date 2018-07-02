@@ -14,12 +14,19 @@ app.use(bodyParser.json({ limit: '50mb'}));
 app.use(cookieParser());
 
 app.get('/', (req, res) => {
-	console.log(req.cookies);
 	res.sendFile(__dirname + '/index.html');
+});
+
+app.get('/chat', (req, res) => {
+	res.sendFile(__dirname + '/chat.html');
 });
 
 authRoutes = require('./routes/authRoutes')();
 app.use('/auth', authRoutes);
+
+contactRoutes = require('./routes/contactRoutes')();
+app.use('/contact', contactRoutes);
+
 
 http.listen(port, function(){
     console.log('Handshake dev running on port: ' + port);

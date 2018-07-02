@@ -12,7 +12,8 @@ class RegisterController {
         new_user.create(new_user_data)
         	.then(data => {
         		res.json(data);
-        	}).catch(err => {
+        	})
+            .catch(err => {
         		console.log(err);
         		res.json(err);
         	})
@@ -23,7 +24,8 @@ class RegisterController {
     	UserModel.checkExistance(req.body.username, req.body.email)
     		.then((result) => {
 				res.json(result);
-			}).catch(error => {
+			})
+            .catch(error => {
 				console.log(error);
 				res.json(error);
 			});

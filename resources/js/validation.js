@@ -1,3 +1,11 @@
+var host_url = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
+var chat_url = host_url +'/chat';
+
+var user_id = docCookies.getItem('user_id');
+if(user_id){
+	window.location = chat_url;
+}
+
 var register_form = document.forms.register_form;
 var login_form = document.forms.login_form;
 
@@ -9,8 +17,14 @@ function loginUser(e){
 	var form = validateLoginForm();
 	if (form !== false) {
 		postData('http://localhost:3000/auth/login', form)
-			.then(user_id => {
-				docCookies.setItem("user_id", user_id);
+			.then(response => {
+				if (response.success === true){
+					docCookies.setItem("user_id", response.id);
+					alert(response.message);
+					window.location = chat_url;
+				} else {
+					alert(response.message);
+				}
 			})
 			.catch(error => {
 				console.error(error);
@@ -200,25 +214,7 @@ function validatePasswords(password, retype_password) {
 	return true;
 }
 
-function postData(url, data) {
-	// Default options are marked with *
-	return fetch(url, {
-		body: JSON.stringify(data), // must match 'Content-Type' header
-		cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-		credentials: 'same-origin', // include, same-origin, *omit
-		headers: {
-			'user-agent': 'Mozilla/4.0 MDN Example',
-			'content-type': 'application/json'
-		},
-		method: 'POST', // *GET, POST, PUT, DELETE, etc.
-		mode: 'cors', // no-cors, cors, *same-origin
-		redirect: 'follow', // manual, *follow, error
-		referrer: 'no-referrer', // *client, no-referrer
-	})
-	.then(response => {
-		return response.json()
-	}); // parses response to JSON
-}
+
 
 function maxAgeToGMT (nMaxAge) {
 

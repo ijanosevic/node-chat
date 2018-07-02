@@ -20,11 +20,6 @@ var chat_history = document.getElementById('messages');
 if (!user) {
 
 	login_form.querySelector('button').addEventListener('click', function(e){
-		
-
-		// todo: provera da li je nickname vec zauzet
-		// todo: provera da li je nickname valida-an
-
 
 		e.preventDefault();
 		nickname = nickname_input.value;
