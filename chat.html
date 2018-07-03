@@ -7,12 +7,17 @@
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="static/css/main.css">
 </head>
 <body>
+
 	<div class="container">
 		<div class="row">
 
-			<div id="add_contact_wrapper" class="col m3 s6">
+			<div id="add_contact_wrapper" class="col m4 s12">
 				<h6>Find friends</h6>
 				<form id="add_contact_form" name="add_contact_form">
 					<div class="row">
@@ -22,6 +27,93 @@
 					</div>
 					<a class="waves-effect waves-light btn-small">Add friend</a>
 				</form>
+			</div>
+			<div id="" class="col m4 s12">
+				<h6>My friends</h6>
+				<ul id="friendList" class="collection">
+					<li class="collection-item avatar">
+						<i class="material-icons circle orange">MI</i>
+						<span class="title">michelangelo</span>
+						<p>First Line</p>
+						<!-- <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a> -->
+					</li>
+					<li class="collection-item avatar">
+						<i class="material-icons circle blue">LE</i>
+						<span class="title">leonardo</span>
+						<p>First Line</p>
+						<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+					</li>
+					<li class="collection-item avatar">
+						<i class="material-icons circle purple">DO</i>
+						<span class="title">donatello</span>
+						<p>First Line</p>
+						<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+					</li>
+					<li class="collection-item avatar">
+						<i class="material-icons circle red">RA</i>
+						<span class="title">raphael</span>
+						<p>First Line</p>
+						<!-- <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a> -->
+					</li>
+				</ul>
+			</div>
+
+			<div id="" class="col m8 s12">
+				<h6>Chat box</h6>
+				<div class="row" id="chat_wrapper">
+					<div id="chat_content">
+						<ul>
+							<li class="me">
+								<i class="material-icons circle orange">MI</i>
+								<p>standard dummy text? <span class="time">11:11</span></p>
+							</li>
+							<li class="me">
+								<i class="material-icons circle orange">MI</i>
+								<p>Lorem Ipsum? <span class="time">11:11</span></p>
+							</li>
+							<li>
+								<i class="material-icons circle purple">DO</i>
+								<p>Mauris ut leo ante. <span class="time">11:11</span></p>
+							</li>
+							<li>
+								<i class="material-icons circle purple">DO</i>
+								<p>Quisque vel vulputate turpis, semper lacinia felis! <span class="time">11:11</span></p>
+							</li>
+							<li class="me">
+								<i class="material-icons circle orange">MI</i>
+								<p>Nullam vitae mollis sem. <span class="time">11:11</span></p>
+							</li>
+							<li class="me">
+								<i class="material-icons circle orange">MI</i>
+								<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque sed turpis vitae tellus dignissim finibus. Fusce condimentum vehicula mi eget auctor. <span class="time">11:11</span></p>
+							</li>
+							<li>
+								<i class="material-icons circle purple">DO</i>
+								<p>Quisque vel orci eros. Integer laoreet leo felis :))) <span class="time">11:11</span></p>
+							</li>
+							<li>
+								<i class="material-icons circle purple">DO</i>
+								<p>eget <span class="time">11:11</span></p>
+							</li>
+							<li class="me">
+								<i class="material-icons circle orange">MI</i>
+								<p>In hac habitasse platea dictumst. Phasellus elementum venenatis ligula. Nulla vel sapien vehicula, maximus sem ut, vehicula risus. Etiam lobortis feugiat metus. Quisque vel orci eros. Integer laoreet leo felis, et laoreet mi interdum sodales. Nulla arcu ante, luctus nec sollicitudin a, vestibulum eget risus. Sed viverra velit aliquet sagittis ultrices. Aenean ac tellus eget ligula lacinia dignissim sit amet at nisl. Nulla ultrices sem in porta vulputate. Nunc ornare quam sit amet sapien tristique, et commodo neque scelerisque. Fusce sollicitudin dictum ipsum. Proin faucibus velit sed blandit pretium. Donec eu porttitor lorem. <span class="time">11:11</span></p>
+							</li>
+						</ul>
+					</div>
+					<div id="chat_form">
+						<div class="row">
+							<div class="input-field col s10">
+								<textarea id="message" class="materialize-textarea"></textarea>
+							</div>
+							<div class="send_button_wrapper col s2">
+								<a class="btn-floating btn-large waves-effect waves-light red">
+									<i class="material-icons green">send</i>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

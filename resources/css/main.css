@@ -1,0 +1,111 @@
+#add_contact_wrapper{
+	display: none;
+}
+#friendList li{
+	cursor: pointer;
+	min-height: initial;
+	height: 64px;
+}
+#friendList li:hover{
+	background-color: #efefef;
+}
+#friendList li p{
+	color: #0000008f;
+}
+#chat_wrapper{
+	margin: .5rem 0 1rem 0;
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+}
+#chat_content{
+	min-height: 250px;
+	max-height: 500px;
+	background-color: #adadad33;
+	overflow-y: scroll;
+}
+#chat_content ul{
+	margin: 0;
+	padding: 0;
+}
+#chat_content ul li{
+	/*outline: 1px solid red;*/
+	position: relative;
+	min-height: 50px;
+}
+#chat_content ul li::after{
+	content: "";
+    clear: both;
+    display: table;
+}
+#chat_content ul li p{
+	outline-offset: -4px;
+	margin: 7px 0 10px 60px;
+	max-width: calc(100% - 120px);
+	background-color: #fff;
+	border-radius: 7px;
+	padding-left: 4px;
+	padding-right: 4px;
+}
+#chat_content ul li.me p{
+	margin: 7px 60px 10px 0;
+}
+#chat_content ul li p span.time{
+    display: block;
+    color: #00000059;
+    font-size: 13px;
+    margin-top: -3px;
+}
+#chat_content ul li i{
+	display: inline-block;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 36px;
+    font-size: 22px;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    color: #fff;
+}
+#chat_content ul li.me i{
+	left: initial;
+	right: 10px;
+}
+#chat_content ul li.me p{
+	float: right;
+	padding-left: initial;
+	margin-right: 60px;
+	padding-left: 6px;
+}
+#chat_content ul li.me p span.time{
+	text-align: right;
+}
+#chat_form{
+	height: 64px;
+	border-top: 1px solid #e0e0e0;
+}
+#chat_form .input-field{
+	margin-top: 0;
+	margin-bottom: 0;
+}
+#chat_form textarea{
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-left: 20px;
+	max-height: 40px;
+	overflow-y: scroll;
+	resize: none;
+}
+#chat_form .send_button_wrapper{
+    text-align: center;
+}
+#chat_form .send_button_wrapper a{
+	width: 40px;
+	height: 40px;
+	margin-top: 10px;
+}
+#chat_form .send_button_wrapper a i{
+	line-height: 40px;
+}
