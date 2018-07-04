@@ -1,15 +1,15 @@
 #add_contact_wrapper{
 	display: none;
 }
-#friendList li{
+#chatList li{
 	cursor: pointer;
 	min-height: initial;
 	height: 64px;
 }
-#friendList li:hover{
+#chatList li:hover{
 	background-color: #efefef;
 }
-#friendList li p{
+#chatList li p{
 	color: #0000008f;
 }
 #chat_wrapper{
@@ -29,7 +29,7 @@
 	margin: 0;
 	padding: 0;
 }
-#chat_content ul li{
+#chat_content ul li:not(.date_separator){
 	/*outline: 1px solid red;*/
 	position: relative;
 	min-height: 50px;
@@ -82,6 +82,20 @@
 #chat_content ul li.me p span.time{
 	text-align: right;
 }
+#chat_content ul li.date_separator{
+	text-align: center;
+	display: block;
+	height: 1px;
+	background-color: #fff;
+	margin: 20px 0 40px;
+}
+#chat_content ul li.date_separator span{
+	display: inline-block;
+	padding: 3px 10px;
+	background-color: #fff;
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
+}
 #chat_form{
 	height: 64px;
 	border-top: 1px solid #e0e0e0;
@@ -108,4 +122,11 @@
 }
 #chat_form .send_button_wrapper a i{
 	line-height: 40px;
+}
+#logout_btn{
+	margin: 15px !important;
+}
+#contacts_window,
+#account_window{
+	display: none;
 }

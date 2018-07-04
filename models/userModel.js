@@ -17,7 +17,7 @@ class UserModel {
 		this.password;
 		this.lastTimeActive;
 		this.groupIds;
-		this.friendIds;
+		this.friend_ids;
 		this.friendRequestIds;
 		this.status;
 	}
@@ -93,6 +93,47 @@ class UserModel {
 				});
 		    });
     	}
+    }
+
+    static get(id){
+    	return new Promise((resolve, reject) => {
+	    	rdb.hgetall(r_keys.client+id, function(err, user_data){
+				resolve(user_data);
+			});
+		});
+    }
+
+    static getFriends(id, friend_ids){
+    	return new Promise((resolve, reject) => {
+    		let friends = [];
+	    	friend_ids.map(id => {
+	    		UserModel.get(id)
+	    			.then(user_data => {
+	    				delete user_data.password;
+						delete user_data.fr_ids;
+						delete user_data.frq_ids;
+	    				friends.push(user_data);
+						if (friends.length === friend_ids.length){
+		    				resolve(friends);
+						}
+	    			})
+	    			.catch(err => {
+	    				console.log(err);
+	    				reject(err);
+	    			});
+	    	});
+		});
+    }
+
+    static setKey(id, key, value){
+
+    	rdb.hset(r_keys.client+id, key, value);
+    }
+
+    static setStatus(id, value){
+    	console.log(r_keys.client+id);
+    	console.log(value);
+    	rdb.hset(r_keys.client+id, 'status', value);
     }
 
     static find(username, password){

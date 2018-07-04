@@ -1,3 +1,5 @@
+var host_url = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
+
 function postData(url, data) {
 	// Default options are marked with *
 	return fetch(url, {

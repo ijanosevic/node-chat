@@ -20,7 +20,6 @@ function loginUser(e){
 			.then(response => {
 				if (response.success === true){
 					docCookies.setItem("user_id", response.id);
-					alert(response.message);
 					window.location = chat_url;
 				} else {
 					alert(response.message);
