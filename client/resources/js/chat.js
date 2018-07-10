@@ -26,9 +26,21 @@ add_contact_form.querySelector('a').addEventListener('click', (e) => {
 
 // socket communication  ================================================================
 
-var channel_lookup = {
-	online: 'client_online',				// =----->  klijent je povezan na server
-	f_list: 'friends_list'					// =----->  slanje spiska i statusa prijatelja nakon sto je uspostavljena inicijalna konekcija
+var channels = {
+	online: 'client_online',
+	online_response: 'client_online_response',
+	fetch_friends: 'f_friends',
+	friends: 'friends',
+	fetch_rooms: 'f_rooms',
+	rooms: 'rooms',
+	fetch_correspondence: 'f_correspondence',
+	correspondence: 'correspondence',
+	send_message: 's_message',
+	message: 'message',
+	send_typing: 's_typing',
+	typing: 'typing',
+	create_room: 'c_room',
+	room: 'room'
 }
 
 function getNewSocketId(socket){
@@ -50,7 +62,7 @@ function updateClientSocket(socket, user_id){
 				sid: socket_id,
 				uid: user_id
 			}
-			socket.emit(channel_lookup.online, creds);
+			socket.emit(channels.online, creds);
 		})
 		.catch(err => {
 			console.log('NEuspesno');
@@ -61,7 +73,7 @@ function updateClientSocket(socket, user_id){
 var socket = io('http://localhost:3000/');
 updateClientSocket(socket, user_id);
 
-socket.on(channel_lookup.online, function(data){
+/*socket.on(channels.online, function(data){
 
 	var account_details_ul = document.getElementById('account_details');
 	for (let key in data){
@@ -72,7 +84,7 @@ socket.on(channel_lookup.online, function(data){
 	}
 });
 
-socket.on(channel_lookup.f_list, function(data){
+socket.on(channels.friends, function(data){
 
 	console.log(data);
 	var friend_list_ul = document.getElementById('friendList');
@@ -110,4 +122,53 @@ socket.on(channel_lookup.f_list, function(data){
 			}
 		});
 	}
+});*/
+
+
+socket.on('friends', (data) => {
+	console.log('data on channel "friends"');
+	console.log(data);
 });
+
+socket.on('rooms', (data) => {
+	console.log('data on channel "rooms"');
+	console.log(data);
+});
+
+socket.on('correspondence', (data) => {
+	console.log('data on channel "correspondence"');
+	console.log(data);
+});
+
+socket.on('message', (data) => {
+	console.log('data on channel "message"');
+	console.log(data);
+});
+
+socket.on('typing', (data) => {
+	console.log('data on channel "typing"');
+	console.log(data);
+});
+
+socket.on('room', (data) => {
+	console.log('data on channel "room"');
+	console.log(data);
+});
+
+socket.on('client_online_response', (data) => {
+	console.log('data on channel "client_online_response"');
+	console.log(data);
+});
+
+socket.on('disconnected', (data) => {
+	console.log('changes on network, some of your friends just went offline');
+	console.log(data);
+});
+
+document.querySelectorAll('button.tst').forEach(button => {
+	
+	let channel_name = button.dataset.event;
+	button.addEventListener('click', () => {
+		socket.emit(channel_name, 666);
+	})
+})

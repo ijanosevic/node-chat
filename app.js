@@ -27,6 +27,6 @@ http.listen(port, function(){
     console.log('App is runnning on port ' + port);
 });
 
-SocketServer = require('./server');
+SocketServer = require('./classes/socketServer');
 socketServer = new SocketServer(http);
 socketServer.listen();
