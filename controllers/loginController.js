@@ -1,11 +1,12 @@
-AuthenticateUser = require('../classes/authenticateUser');
+UserAuthenticate = require('../classes/userAuthenticate');
 
 class LoginController {
 
     login(req, res) {
 
-    	AuthenticateUser.login(req.body.email, req.body.password)
+    	UserAuthenticate.login(req.body.email, req.body.password)
 			.then(user => {
+				
 				delete user.password;
 				delete user.room_list;
 				delete user.friend_list;
@@ -22,6 +23,9 @@ class LoginController {
 				res.json(response);
 			})
 			.catch(err => {
+
+				console.log(err);
+				throw err;
 
 				var response = {
 					message: 'Wrong credentials',

@@ -1,8 +1,5 @@
-var rdb = require('../db');
-var r_keys = require('../redis_lookup');
-
+// todo: replace this class
 UserModel = require('../models/userModel');
-
 
 class RegisterController {
 

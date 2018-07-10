@@ -1,12 +1,11 @@
-var rdb = require('../db');
-var r_keys = require('../redis_lookup');
+const redis = require("redis");
 
 class Database {
 	
 	constructor() {
-		this.db = rdb;
-		this.r_keys = r_keys;
+		this.db = redis.createClient(6379, '127.0.0.1');
+		this.keys = {};
 	}
 }
 
-module.exports = Database;
+module.exports = new Database();
