@@ -29,6 +29,7 @@ class UserModel {
 			UserModel.generateClientId()
 				.then((cid) => {
 
+					rdb.hset(r_keys.client+cid, 'id', cid);
 					for (var key in new_user_data) {
 						rdb.hset(r_keys.client+cid, key, new_user_data[key]);
 					}
@@ -103,28 +104,6 @@ class UserModel {
 		});
     }
 
-    static getFriends(id, friend_ids){
-    	return new Promise((resolve, reject) => {
-    		let friends = [];
-	    	friend_ids.map(id => {
-	    		UserModel.get(id)
-	    			.then(user_data => {
-	    				delete user_data.password;
-						delete user_data.fr_ids;
-						delete user_data.frq_ids;
-	    				friends.push(user_data);
-						if (friends.length === friend_ids.length){
-		    				resolve(friends);
-						}
-	    			})
-	    			.catch(err => {
-	    				console.log(err);
-	    				reject(err);
-	    			});
-	    	});
-		});
-    }
-
     static setKey(id, key, value){
 
     	rdb.hset(r_keys.client+id, key, value);
@@ -136,7 +115,7 @@ class UserModel {
     	rdb.hset(r_keys.client+id, 'status', value);
     }
 
-    static find(username, password){
+    static find(email, password){
     	return new Promise((resolve, reject) => {
 	    	password = md5(JSON.stringify(password));
 	    	rdb.hget(r_keys.client_id_uname_pairs, username, function(err, id){
@@ -152,44 +131,6 @@ class UserModel {
 					} else {
 						reject('Wrong password');
 					}
-				});
-			});
-	    });
-    }
-
-    static addFriend(user_id, friendEmail){
-    	return new Promise((resolve, reject) => {
-    		rdb.hgetall(r_keys.client_uname_email_pairs, function(err, data){
-    			
-    			let friendUsername = '';
-				for (let key in data){
-					if (data[key] === friendEmail) {
-						friendUsername = key;
-						break;
-					}
-				}
-
-				rdb.hget(r_keys.client_id_uname_pairs, friendUsername, function(err, id){
-
-					const friendKey = r_keys.client+id;
-				  	rdb.hget(friendKey, r_keys.friend_request_ids, function(err, friend_request_ids){
-				  		if (friend_request_ids === null){
-				  			rdb.hset(friendKey, r_keys.friend_request_ids, user_id);
-				  			resolve('You have successfully sent friend request to this user.');
-
-				  		} else {
-				  			
-				  			friend_request_ids = friend_request_ids.split(':');
-				  			if (friend_request_ids.includes(user_id)){
-								reject('You have already sent request to this user.');
-							} else {
-								friend_request_ids.push(user_id);
-								friend_request_ids = friend_request_ids.join(':');
-								rdb.hset(friendKey, r_keys.friend_request_ids, friend_request_ids);
-								resolve('You have successfully sent friend request to this user.');
-							}
-				  		}
-					});
 				});
 			});
 	    });

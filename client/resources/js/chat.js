@@ -72,19 +72,42 @@ socket.on(channel_lookup.online, function(data){
 	}
 });
 
-socket.on(channel_lookup.f_list, function(friend_list){
+socket.on(channel_lookup.f_list, function(data){
 
+	console.log(data);
 	var friend_list_ul = document.getElementById('friendList');
-	for (var i = 0; i < friend_list.length; i++) {
-		const friend = friend_list[i];
-		let initials = friend.username.substr(0, 2).toUpperCase();
-		let username = friend.username;
-		let online_status = (friend.status === '0') ? '' : '<a href="#!" class="secondary-content"><i class="material-icons">blur_on</i></a>';
-		let contact_html = `<li class="collection-item avatar">
-								<i class="material-icons circle blue">${initials}</i>
-								<span class="title">${username}</span>
-								${online_status}
-							</li>`;
-		friend_list_ul.insertAdjacentHTML('beforeend', contact_html);
+
+	const friend_list = data.friend_list;
+	console.log(friend_list);
+	const update_type = data.update_type;
+
+	if (update_type === 'init') {
+
+		for (var i = 0; i < friend_list.length; i++) {
+			const friend = friend_list[i];
+			const friend_id = friend.id;
+			let initials = friend.username.substr(0, 2).toUpperCase();
+			let username = friend.username;
+			let online_status = (friend.status === '0') ? '' : 'blur_on';
+			let contact_html = `<li class="collection-item avatar" data-id="${friend_id}">
+									<i class="material-icons circle blue">${initials}</i>
+									<span class="title">${username}</span>
+									<a href="#!" class="secondary-content"><i class="material-icons status">${online_status}</i></a>
+								</li>`;
+			friend_list_ul.insertAdjacentHTML('beforeend', contact_html);
+		}
+	} else {
+		console.log('update samo jednog kontakta');
+		console.log(data);
+		friend_list_ul.querySelectorAll('li').forEach(li => {
+			if (li.dataset.id === data.friend_id) {
+				console.log('nasao');
+				console.log(li);
+				console.log(data.status);
+				let online_status = (data.status === '0') ? '' : 'blur_on';
+				li.querySelector('.status').innerText = online_status;
+				// console.log(li.querySelector('.status').innerText);
+			}
+		});
 	}
 });

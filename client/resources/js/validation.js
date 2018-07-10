@@ -19,7 +19,11 @@ function loginUser(e){
 		postData('http://localhost:3000/auth/login', form)
 			.then(response => {
 				if (response.success === true){
-					docCookies.setItem("user_id", response.id);
+					
+					console.log(response.data);
+					// var ts = new Date(parseInt(response.data.created_at));
+
+					docCookies.setItem("user_id", response.data.id, maxAgeToGMT(86400));
 					window.location = chat_url;
 				} else {
 					alert(response.message);
@@ -71,12 +75,12 @@ function checkUsernameAvailability(form_data){
 
 function validateLoginForm(){
 	
-	var username = login_form.querySelector('#l_username');
+	var email = login_form.querySelector('#l_email');
 	var password = login_form.querySelector('#l_password');
 
-	if (username.value == "") {
-        username.style.background = 'Yellow';
-        error = "You didn't enter a username.\n";
+	if (email.value == "") {
+        email.style.background = 'Yellow';
+        error = "You didn't enter a email.\n";
         alert(error);
         return false;
  
@@ -88,7 +92,7 @@ function validateLoginForm(){
  
     } else {
     	var result = {
-				username: username.value,
+				email: email.value,
 				password: password.value
 			}
     	return result;
@@ -212,8 +216,6 @@ function validatePasswords(password, retype_password) {
     }
 	return true;
 }
-
-
 
 function maxAgeToGMT (nMaxAge) {
 
