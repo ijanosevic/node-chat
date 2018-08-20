@@ -8,6 +8,15 @@ app.use('/static', express.static(__dirname+ '/client/resources'));
 
 var port = process.env.PORT || 3000;
 
+/*
+
+TODO: HANDLANJE VREMENA!!!
+
+// let trenutno_vreme = new Date();
+// console.log(`trenutno vreme: ${trenutno_vreme}`);
+// console.log(`offset: ${trenutno_vreme.getTimezoneOffset()}`);
+*/
+
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb'}));
 app.use(bodyParser.json({ limit: '50mb'}));
 app.use(cookieParser());
@@ -18,6 +27,10 @@ app.get('/', (req, res) => {
 
 app.get('/chat', (req, res) => {
 	res.sendFile(__dirname + '/client/chat.html');
+});
+
+app.get('/chat2', (req, res) => {
+	res.sendFile(__dirname + '/client/chat2.html');
 });
 
 authRoutes = require('./routes/authRoutes')();

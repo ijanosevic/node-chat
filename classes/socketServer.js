@@ -1,7 +1,5 @@
-UserFriends = require('./userFriends');
-UserRooms = require('./userRooms');
-RoomMembers = require('./roomMembers');
-RoomCorrespondence = require('./roomCorrespondence');
+OnlineController = require('../controllers/userOnlineController');
+CorrespondenceController = require('../controllers/correspondenceController');
 
 class SocketServer {
 	
@@ -13,24 +11,31 @@ class SocketServer {
 	listen(){
 
 		// console.log('Socket server is running');
-
 		this.io.sockets.on('connection', (socket) => {
 			
 			// console.log('client connected');
-
 			socket.on('client_online', (payload) => {
-				this.clients[socket.user_id] = socket;
+
 				socket.user_id = payload.uid;
-				this.sendInitialResponse(socket);
+				this.clients[socket.user_id] = socket;
+				OnlineController.clientOnline(socket);
 			});
 
 			socket.on('f_friends', (payload) => { this.sendFriends(socket, payload) });
 			
 			socket.on('f_rooms', (payload) => { this.sendRooms(socket, payload) });
 			
-			socket.on('f_correspondence', (payload) => { this.sendCorrespondence(socket, payload) });
+			socket.on('f_correspondence', (payload) => { 
+				CorrespondenceController.sendCorrespondence(socket, payload);
+			});
 
-			socket.on('s_message', (payload) => { this.passMessage(socket, payload) });
+			socket.on('s_message', (payload) => {
+				CorrespondenceController.passMessage(socket, payload)
+					.then(data => {
+						this.io.emit(data.roomId, data.msg);
+					})
+					.catch(err => {});
+			});
 			
 			socket.on('s_typing', () => { this.passTyping(socket) });
 
@@ -43,11 +48,6 @@ class SocketServer {
 		});
 	}
 
-	sendInitialResponse(socket){
-		
-		socket.emit('client_online_response', 'Server response to "client_online" socket event');
-	}
-
 	sendFriends(socket, payload){
 		console.log('client requesting friend list, payload: ');
 		socket.emit('friends', 'Server response to "f_friends" socket event');
@@ -56,16 +56,6 @@ class SocketServer {
 	sendRooms(socket, payload){
 		console.log('client requesting room list');
 		socket.emit('rooms', 'Server response to "f_rooms" socket event');
-	}
-
-	sendCorrespondence(socket, payload){
-		console.log('client requesting room correspondence');
-		socket.emit('correspondence', 'Server response to "f_correspondence" socket event');
-	}
-
-	passMessage(socket, payload){
-		console.log('client emited a message');
-		socket.emit('message', 'Server response to "s_message" socket event');
 	}
 
 	createRoom(socket, payload){

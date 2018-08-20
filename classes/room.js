@@ -1,7 +1,12 @@
 const database = require('./database');
 
-class User {
-	static fetch(id){
+class Room {
+
+	constructor(){
+		this.test = 666;
+	}
+
+	/*static fetch(id){
 		return new Promise((resolve, reject) => {
 			
 			database.db.hgetall('u:'+id, (err, data) => {
@@ -15,7 +20,7 @@ class User {
 				resolve(data);
 			});
 		});
-	}
+	}*/
 }
 
-module.exports = User;
+module.exports = Room;

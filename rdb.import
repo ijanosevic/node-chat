@@ -1,7 +1,10 @@
 hset u:0000 id 0000 first_name Igor last_name Janosevic email i.janosevic@igenoo.com profile_picture_url http://cache.umusic.com/_sites/kendricklamar.com/images/og.jpg password e10adc3949ba59abbe56e057f20f883e last_active 1531140118218 created_at 1531140118218
 hset u:1111 id 1111 first_name Aleksandar last_name Janosevic email sale.kicos@gmail.com profile_picture_url https://pbs.twimg.com/profile_images/833074741548294144/Gbfavdtl_400x400.jpg password e10adc3949ba59abbe56e057f20f883e last_active 1531140415974 created_at 1531140415974
+
 hset u:2222 id 2222 first_name Marton last_name Terkelj email mare@gmail.com profile_picture_url https://www.billboard.com/files/styles/article_main_image/public/media/sean-diddy-combs-bw-portrait-billboard-1548.jpg password e10adc3949ba59abbe56e057f20f883e last_active 1531140583858 created_at 1531140583858
+
 hset u:3333 id 3333 first_name Lazar last_name Stevanov email lazar@gmail.com profile_picture_url https://i.pinimg.com/originals/92/d7/f4/92d7f4cdd2ea4abd2e547aaecc18ceff.jpg password e10adc3949ba59abbe56e057f20f883e last_active 1531140698054 created_at 1531140698054
+
 sadd fl:0000 u:1111 u:2222 u:3333
 sadd fl:1111 u:0000 u:2222 u:3333
 sadd fl:2222 u:0000 u:1111 u:3333
@@ -42,8 +45,14 @@ sadd ml:0009 u:2222 u:3333
 sadd ml:0010 u:3333 u:0000
 sadd ml:0011 u:3333 u:2222
 sadd ml:0012 u:3333 u:1111
+
 lpush c:1 msg:1 msg:2 msg:3
 hset r:0001 correspondence c:1
-hset msg:1 id 1 sender u:0000 content 'Bracalaaaaa' created_at 1531144140758 
-hset msg:2 id 2 sender u:1111 content 'Igisha, s\' to ti?' created_at 1531144163284
-hset msg:3 id 3 sender u:0000 content 'Ja brale :)' created_at 1531144248748 
+hset msg:1 id 1 sender 0000 content 'Bracalaaaaa' created_at 1531144140758 
+hset msg:2 id 2 sender 1111 content 'Igisha, s\' to ti?' created_at 1531144163284
+hset msg:3 id 3 sender 0000 content 'Ja brale :)' created_at 1531144248748 
+
+lpush c:2 msg:4 msg:5
+hset r:0003 correspondence c:2
+hset msg:4 id 4 sender 3333 content 'Kako si, sa kim si, sta radis?' created_at 1531144140758 
+hset msg:5 id 5 sender 0000 content 'Evo me doma, sa Lazarem, programiramo. U LAZARE, to si ti u stvari???' created_at 1531144163284

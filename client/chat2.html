@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>This is chat window</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="static/css/main2.css">
+</head>
+<body>
+	<nav class="navbar blue-grey lighten-4">&nbsp;</nav>
+	<div id="main" class="row main">
+
+		<div id="sidebarWrapper" class="col m3 s12 grey lighten-2 sidebar-wrapper">
+
+			<!-- Modal Structure -->
+			<!-- <div id="modal1" class="modal">
+				<div class="modal-content">
+					<h4>Modal Header</h4>
+					<p>A bunch of text</p>
+				</div>
+				<div class="modal-footer">
+					<a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+				</div>
+			</div> -->
+			<!-- call modal -->
+			<!-- <a href="#modal1" id="chatInfoBtn" class="modal-trigger chat-info-btn"><i class="material-icons">info_outline</i></a> -->
+			
+			<ul id="navTabs" class="tabs tabs-fixed-width">
+				<li class="tab col s3">
+					<a class="active" href="#chatRooms" title="Conversations"><i class="material-icons small">chat_bubble</i></a>
+				</li>
+				<li class="tab col s3">
+					<a href="#contacts" title="Contacts"><i class="material-icons small">contacts</i></a><
+					/li> 
+				<li class="tab col s3">
+					<a href="#profile" title="Profile"><i class="material-icons small">account_box</i></a>
+				</li>
+			</ul>
+			
+			<div id="chatRooms" class="col s12 chat-rooms-wrapper">
+				
+				<div id="" class="clearfix chat-room-search-wrapper">
+					<div class="chat-room-search-box-wrapper">
+						<input type="text" name="filterChatRooms" placeholder="Search..."> <!-- usinkovati name atribute -->
+					</div>
+					<a href="#" id="createChatRoomBtn" title="Compose"><i class="material-icons">add_box</i></a>
+				</div>
+				<div id="chatRoomList" class="chat-rooms-list-wrapper">
+					<ul class="collection"></ul>
+				</div>
+
+				<div id="sidebarOverlayWrapper" class="sidebar-overlay-wrapper contact-wrapper grey lighten-2 hidden">
+					
+					<div id="" class="clearfix chat-room-search-wrapper">
+						<div class="contact-search-box-wrapper">
+							<input type="text" name="filterContacts" placeholder="Filter contacts"> <!-- usinkovati name atribute -->
+						</div>
+					</div>
+					
+					<div id="selectableContactList" class="contact-list-wrapper">
+						<ul class="collection"></ul>
+					</div>
+				</div>
+			</div>
+
+			<div id="contacts" class="col s12 contact-wrapper">
+				
+				<div id="findContactBtn" class="clearfix contact-search-wrapper">
+					<div class="clearfix contact-search-box-wrapper">
+						<input type="text" name="contact" placeholder="Filter contacts" class="contracted">
+						<a class="waves-effect waves-light btn-small" id="addNewContactBtn">New contact</a>
+					</div>
+				</div>
+
+				<div id="contactList" class="clearfix contact-list-wrapper">
+					<ul class="collection"></ul>
+				</div>
+			</div>
+
+			<div id="profile" class="col s12 profile-wrapper">profile</div>
+		</div>
+		
+		<div id="chatBoxWrapper" class="col m9 s12 chat-box-wrapper" data-id="" data-pristine="true">
+			<header id="chatBoxHeader" class="clearfix chat-box-header">
+				<div class="chat-picture-wrapper">
+					<img src="" alt="" class="circle">
+				</div>
+				<div class="chat-info">
+					<span class="name">&nbsp;</span>
+					<a href="#" id="chatInfoBtn" class="modal-trigger chat-info-btn"><i class="material-icons">info_outline</i></a>
+					
+				</div>
+			</header>
+
+			<main class="">
+				<div class="row main-inner-wrapper">
+					<div class="col s10 offset-s1 m6 offset-m3 chat-content">
+						<ul></ul>
+					</div>
+				</div>
+				<div class="row chat-box-form-wrapper">
+					<div class="col col s10 offset-s1 m6 offset-m3">
+						<div class="input-field col s10">
+							<textarea id="message" class="materialize-textarea"></textarea>
+						</div>
+						<div class="send-button-wrapper col s2">
+							<a id="sendMessageBtn" class="btn-floating btn-large waves-effect waves-light send-message-btn">
+								<i class="material-icons">send</i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</main>
+		</div>
+
+		<div id="chatBoxInfoWrapper" class="col m2 s12 grey lighten-5 chat-box-info-wrapper hidden">
+			<header>
+				<img src="https://scontent.fbeg6-1.fna.fbcdn.net/v/t31.0-8/16819343_10154201959117624_5480796608955144894_o.jpg?_nc_cat=0&oh=18d8e12a15eec55d6b27e2d385edfe86&oe=5BFF5153">
+				<div class="title">
+					<input type="text" name="roomTitle" value="John Doe">
+					<a href="#" id="editTitleBtn" class="edit-title-btn" title="Edit title"><i class="material-icons">mode_edit</i></a>
+					<a href="#" id="saveTitleBtn" class="edit-title-btn hidden" title="save title"><i class="material-icons">check</i></a>
+				</div>
+			</header>
+			<ul id="participantsList" class="collection with-header">
+				<li class="collection-header">
+					<h6>Participants
+						<a href="#" id="addRoomParticipantBtn" title="Add participant"><i class="material-icons">add_box</i></a>
+					</h6>
+				</li>
+				<li class="collection-item">
+					<div>John Doe
+						<a href="#!" class="secondary-content hidden"><i class="material-icons">chat</i></a>
+					</div>
+				</li>
+				<li class="collection-item">
+					<div>Superhik
+						<a href="#!" class="secondary-content hidden"><i class="material-icons">chat</i></a>
+					</div>
+				</li>
+				<li class="collection-item">
+					<div>Sir Oliver
+						<a href="#!" class="secondary-content hidden"><i class="material-icons">chat</i></a>
+					</div>
+				</li>
+				<li class="collection-item">
+					<div>Nosonja
+						<a href="#!" class="secondary-content hidden"><i class="material-icons">chat</i></a>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<div id="newRoomOverlayWrapper" class="col m9 s12 blue-grey lighten-5 new-room-overlay-wrapper hidden"> <!-- chatBoxOverlayWrapper--> <!-- chat-box-overlay-wrapper-->
+			<div class="overlay-inner-wrapper">
+				
+				<div class="title">Select friends to start conversation</div>
+				<form name="group-title" class="group-title-wrapper hidden">
+					<input type="text" id="newGroupName" class="group-title-input" name="" placeholder="Name your group...">
+				</form>
+				<div class="selected-contacts-wrapper"></div>
+				<form>
+					<a class="waves-effect waves-light btn" onclick="revealBaseLayout()">Cancel</a>
+					<a class="waves-effect waves-light disabled btn" id="startRoomBtn">Start</a>
+				</form>
+			</div>
+		</div>
+
+		<div id="newContactOverlayWrapper" class="col m9 s12 blue-grey lighten-5 new-contact-box-overlay-wrapper hidden">
+			<div class="overlay-inner-wrapper">
+				
+				<div class="title">Type in the users email address</div>
+				<form name="user-email" class="user-email-wrapper">
+					<input type="email" id="newContactEmail" class="user-email-input" name="newContactEmail" placeholder="">
+				</form>
+				<form>
+					<a class="waves-effect waves-light btn" id="" onclick="revealBaseLayout()">Cancel</a>
+					<a class="waves-effect waves-light disabled btn" id="addFriendBtn">Send request</a>
+				</form>
+			</div>
+		</div>
+
+
+	</div>
+
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="static/js/cookies.js"></script>
+	<script src="static/js/helper.js"></script>
+
+	<script src="static/js/api.js"></script>
+	<script src="static/js/dom_variables.js"></script>
+	<script src="static/js/html-tmpl-variables.js"></script>
+	<script src="static/js/layout-functions.js"></script>
+	<script src="static/js/chat2.js"></script>
+
+	<script type="text/javascript">
+		document.addEventListener('DOMContentLoaded', function() {
+			var elems = document.querySelectorAll('.modal');
+			var instances = M.Modal.init(elems);
+		});
+	</script>
+
+</body>
+</html>

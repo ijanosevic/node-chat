@@ -1,10 +1,12 @@
 const database = require('./database');
+RoomMembers = require('./roomMembers');
 
 class UserRooms {
-	static fetch(id){
+	
+	static fetch(user_id){
 		return new Promise((resolve, reject) => {
 			
-			database.db.hget('u:'+id, 'room_list', (err, key) => {
+			database.db.hget('u:'+user_id, 'room_list', (err, key) => {
 				if (err) {
 					reject(err);
 				}
@@ -23,19 +25,44 @@ class UserRooms {
 								reject(err_3);
 							}
 
-							if (room.type === 'private') {
-								room['title'] = 'Pull contacts name as title';
-							}
+							UserRooms.getTitle(room, user_id)
+								.then(title => {
 
-							rooms.push(room);
-							if (i === room_keys_list.length - 1){
-								resolve(rooms);
-							}
+									room.title = title;
+									rooms.push(room);
+
+									if (i === room_keys_list.length - 1){
+										resolve(rooms);
+									}
+								})
+
 						});
 					}
 				});
 				
 			});
+		});
+	}
+
+	static getTitle(room, user_id){
+		return new Promise((resolve, reject) => {
+
+			if (room.type === 'private') {
+				RoomMembers.fetch(room)
+					.then(members => {
+						(members).forEach(member => {
+							if (member.id !== user_id) {
+								resolve(member.first_name + ' ' + member.last_name);
+							}
+						});
+					})
+					.catch(err => {
+						throw err;
+					});
+			} else {
+				resolve('nije privatna soba, ima svoj naziv');
+			}
+
 		});
 	}
 }

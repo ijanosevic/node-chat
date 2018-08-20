@@ -62,8 +62,16 @@
 				<a class="waves-effect waves-light btn-small">Add friend</a>
 			</form>
 		</div>
+
+							
+
 		<div id="" class="col m4 s12">
-			<h6>Chats</h6>
+			<h6 class="clearfix">Chat rooms
+				<!-- <span class="create_room_wrapper right-align"><a href="#" id="createRoomBtn">+</a></span> -->
+				<a class="btn-floating btn-large waves-effect waves-light red create_room_btn" id="createRoomBtn">
+					<i class="material-icons green">add</i>
+				</a>
+			</h6>
 			<ul id="chatList" class="collection">
 				<li class="collection-item avatar">
 					<i class="material-icons circle orange">MI</i>
@@ -144,7 +152,7 @@
 							<textarea id="message" class="materialize-textarea"></textarea>
 						</div>
 						<div class="send_button_wrapper col s2">
-							<a class="btn-floating btn-large waves-effect waves-light red">
+							<a class="btn-floating btn-large waves-effect waves-light red" id="send_message_btn">
 								<i class="material-icons green">send</i>
 							</a>
 						</div>
@@ -187,20 +195,15 @@
 			window.location = host_url;
 		});
 
-		document.getElementById('nav').querySelectorAll('a').forEach(link => {
-			const self = link;
-			link.addEventListener('click', (e) => {
-				e.preventDefault();
-				const page_id = self.dataset.page;
-				document.querySelectorAll('.page').forEach(page => {
-					if (page.id == page_id){
-						page.style.display = 'block';
-					} else {
-						page.style.display = 'none';
-					}
-				});
-			});
-		});
+		init_SPA_PageNavigation();
+
+
+		/*let trenutno_vreme = new Date();
+		let trenutno_vreme_timestamp = Date.now();
+		console.log(`trenutno vreme: ${trenutno_vreme}`);
+		console.log(`trenutno vreme timestamp: ${trenutno_vreme_timestamp}`);
+		console.log(`offset: ${trenutno_vreme.getTimezoneOffset()}`);
+		console.log(`timestamp offset: ${trenutno_vreme_timestamp.getTimezoneOffset()}`);*/
 	</script>
 </body>
 </html>

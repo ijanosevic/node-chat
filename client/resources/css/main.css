@@ -1,5 +1,15 @@
+.clearfix::after{
+	display: block;
+	content: '';
+	width: 100%;
+	overflow: hidden;
+}
 #add_contact_wrapper{
 	display: none;
+}
+#chatList{
+	width: 100%;
+	margin-top: 20px;
 }
 #chatList li{
 	cursor: pointer;
@@ -129,4 +139,18 @@
 #contacts_window,
 #account_window{
 	display: none;
+}
+#contact_list_wrapper li a{
+	display: block;
+}
+
+#chat_window .create_room_btn{
+	float: right;
+	width: 40px;
+	height: 40px;
+}
+#chat_window .create_room_btn i{
+	display: block;
+	line-height: 40px;
+	font-size: 18px;
 }

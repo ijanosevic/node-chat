@@ -1,5 +1,5 @@
 var host_url = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
-var chat_url = host_url +'/chat';
+var chat_url = host_url +'/chat2';
 
 var user_id = docCookies.getItem('user_id');
 if(user_id){
